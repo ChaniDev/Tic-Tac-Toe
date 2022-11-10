@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject prefabCross;
     [SerializeField] private GameObject prefabCircle;
     string turnCounter = "Default";
+    int selectedSlot;
 
     Vector2[] allSlots = new Vector2[] 
         {
@@ -29,7 +30,7 @@ public class GameManager : MonoBehaviour
     {
         insInputManager = FindObjectOfType<InputManager>();
     //------
-        turnCounter = "Player";
+        turnCounter = "P1";
         for(int i = 0; i < 9; i++)
         {
             availableSlots.Add(i);
@@ -42,11 +43,11 @@ public class GameManager : MonoBehaviour
     {
         if(turnCounter == "Player")
         {
-            RequestInputPlayer();
+            RequestInputP1();
         }
         else if(turnCounter == "CPU")
         {
-            RequestInputCPU();
+            RequestInputP2();
         }
         else
         {
@@ -55,12 +56,12 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void RequestInputPlayer()
+    void RequestInputP1()
     {
-        
+        selectedSlot = insInputManager.RequestP1Input();
     }
 
-    void RequestInputCPU()
+    void RequestInputP2()
     {
 
     }

@@ -14,13 +14,13 @@ public class InputManager : MonoBehaviour
         insInputID = FindObjectOfType<InputID>();
     }
 
-    public void RequestPlayerInput()
+    public int RequestP1Input()
     {
-        
+        return(10);
     }
 
-    public void RequestCPUInput()
+    public int RequestP2Input()
     {
-
+        return(10);
     }
 }
