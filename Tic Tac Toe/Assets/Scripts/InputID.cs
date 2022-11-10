@@ -5,6 +5,7 @@ using UnityEngine;
 public class InputID : MonoBehaviour
 {
     InputManager insInputManager;
+    
     string TriggerID = "Default";
 
     void Start()

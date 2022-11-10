@@ -4,5 +4,10 @@ using UnityEngine;
 
 public class InputManager : MonoBehaviour
 {
-    
+    List<int> availableSlots;
+
+    void Start()
+    {
+            
+    }
 }
