@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AIEngine : MonoBehaviour
+public class InputAI : MonoBehaviour
 {
     public void Cow()
     {
