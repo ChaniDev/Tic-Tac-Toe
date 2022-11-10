@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] private GameObject Cross;
-    [SerializeField] private GameObject Circle;
+    [SerializeField] private GameObject prefabCross;
+    [SerializeField] private GameObject prefabCircle;
 
 
     Vector2[] allLocation = new Vector2[] 
@@ -21,19 +21,19 @@ public class GameManager : MonoBehaviour
             new Vector2(2,-2)
         };
 
-    public void InputLocation(int triggerLocation, string Player)
+    public void Initiate(int triggerLocation, string playerID)
     {
-        if(Player == "Human")
+        if(playerID == "Human")
         {
-            Instantiate(Cross, allLocation[Random.Range(0,9)], Quaternion.identity);
+            Instantiate(prefabCross, allLocation[Random.Range(0,9)], Quaternion.identity);
         }
-        else if(Player == "CPU")
+        else if(playerID == "CPU")
         {
-
+            Instantiate(prefabCircle, allLocation[Random.Range(0,9)], Quaternion.identity);
         }
         else
         {
-            Debug.LogError("No Player Defined");
+            Debug.LogError("No Player Defined- -GameManager");
             Application.Quit();
         }
     }
