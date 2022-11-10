@@ -4,11 +4,14 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    InputManager insInputManager;
+
+//-----
     [SerializeField] private GameObject prefabCross;
     [SerializeField] private GameObject prefabCircle;
+    string turnCounter = "Default";
 
-
-    Vector2[] allLocation = new Vector2[] 
+    Vector2[] allSlots = new Vector2[] 
         {
             new Vector2(-2,2),
             new Vector2(0,2),
@@ -20,21 +23,45 @@ public class GameManager : MonoBehaviour
             new Vector2(0,-2),
             new Vector2(2,-2)
         };
+    List<int> availableSlots = new List<int>();
 
-    public void Initiate(int triggerLocation, string playerID)
+    void Start()
     {
-        if(playerID == "Human")
+        insInputManager = FindObjectOfType<InputManager>();
+    //------
+        turnCounter = "Player";
+        for(int i = 0; i < 9; i++)
         {
-            Instantiate(prefabCross, allLocation[Random.Range(0,9)], Quaternion.identity);
+            availableSlots.Add(i);
+        } 
+        
+        TurnHandler();
+    }
+
+    void TurnHandler()
+    {
+        if(turnCounter == "Player")
+        {
+            RequestInputPlayer();
         }
-        else if(playerID == "CPU")
+        else if(turnCounter == "CPU")
         {
-            Instantiate(prefabCircle, allLocation[Random.Range(0,9)], Quaternion.identity);
+            RequestInputCPU();
         }
         else
         {
-            Debug.LogError("No Player Defined- -GameManager");
+            Debug.LogWarning("Turn Counter was left undefined or lost its value");
             Application.Quit();
         }
+    }
+
+    void RequestInputPlayer()
+    {
+        
+    }
+
+    void RequestInputCPU()
+    {
+
     }
 }

@@ -4,10 +4,23 @@ using UnityEngine;
 
 public class InputManager : MonoBehaviour
 {
-    List<int> availableSlots;
+    InputID insInputID;
+
+//-----
+
 
     void Start()
     {
-            
+        insInputID = FindObjectOfType<InputID>();
+    }
+
+    public void RequestPlayerInput()
+    {
+        
+    }
+
+    public void RequestCPUInput()
+    {
+
     }
 }
