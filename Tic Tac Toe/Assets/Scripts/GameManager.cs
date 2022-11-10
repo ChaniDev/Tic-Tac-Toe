@@ -4,15 +4,37 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] private GameObject Cross;
+    [SerializeField] private GameObject Circle;
 
-    // Update is called once per frame
-    void Update()
+
+    Vector2[] allLocation = new Vector2[] 
+        {
+            new Vector2(-2,2),
+            new Vector2(0,2),
+            new Vector2(2,2),
+            new Vector2(-2,0),
+            new Vector2(0,0),
+            new Vector2(2,0),
+            new Vector2(-2,-2),
+            new Vector2(0,-2),
+            new Vector2(2,-2)
+        };
+
+    public void InputLocation(int triggerLocation, string Player)
     {
-        
+        if(Player == "Human")
+        {
+            Instantiate(Cross, allLocation[Random.Range(0,9)], Quaternion.identity);
+        }
+        else if(Player == "CPU")
+        {
+
+        }
+        else
+        {
+            Debug.LogError("No Player Defined");
+            Application.Quit();
+        }
     }
 }
