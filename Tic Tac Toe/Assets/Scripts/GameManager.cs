@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    string playerTurn = "Default";
     int selectedLocation = 10;
+    string PlayerID = "default";
 
-    public void InputLocation(int insLocationTrigger)
+    public void InputLocation(int insLocationTrigger, string playerTurn)
     {
         selectedLocation = insLocationTrigger;
+        PlayerID = playerTurn;
 
-        Debug.Log(selectedLocation + "GameManager");
+        print(selectedLocation);
+        print(PlayerID);
     }
 }

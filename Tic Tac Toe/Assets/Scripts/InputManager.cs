@@ -5,25 +5,37 @@ using UnityEngine;
 public class InputManager : MonoBehaviour
 {
     GameManager insGameManager;
+    InputAI insInputAI;
 
 //-----
     int insLocationTrigger = 10;
     List<int> validSlots = new List<int>();
+    string playerTurn = "Default";
 
     void Start()
     {
         insGameManager = FindObjectOfType<GameManager>();
+        insInputAI = FindObjectOfType<InputAI>();
 
         for(int i = 0; i < 9; i++)
         {
             validSlots.Add(i);
         }
+        playerTurn = "P1";
     }
 
     public void P1Input(int locationTrigger)
     {
-        insLocationTrigger = locationTrigger;
+        if(playerTurn.Equals("P1"))
+        {
+            insLocationTrigger = locationTrigger;
+            IsValid();
+        }
+    }
 
+    void P2Input()
+    {
+        insLocationTrigger = insInputAI.locationTrigger(validSlots);
         IsValid();
     }
 
@@ -33,13 +45,20 @@ public class InputManager : MonoBehaviour
         {
             if(insLocationTrigger.Equals(i))
             {
-                insGameManager.InputLocation(insLocationTrigger);
+                insGameManager.InputLocation(insLocationTrigger,playerTurn);
                 validSlots.Remove(i);
+
+                if(playerTurn.Equals("P1"))
+                {
+                    playerTurn = "P2";
+                    P2Input();
+                }
+                else
+                {
+                    playerTurn = "P1";
+                }
+
                 break;
-            }
-            else
-            {
-                Debug.LogWarning("Invalid Location!");
             }
         }
     }
