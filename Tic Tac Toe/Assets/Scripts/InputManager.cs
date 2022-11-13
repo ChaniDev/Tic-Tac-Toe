@@ -5,6 +5,7 @@ using UnityEngine;
 public class InputManager : MonoBehaviour
 {
     GameManager insGameManager;
+
     InputAI insInputAI;
 
 //-----
@@ -26,7 +27,7 @@ public class InputManager : MonoBehaviour
 
     public void P1Input(int locationTrigger)
     {
-        if(playerTurn.Equals("P1"))
+        if(playerTurn.Equals("P1") & GameManager.gameEnded == false)
         {
             insLocationTrigger = locationTrigger;
             IsValid();
@@ -35,8 +36,11 @@ public class InputManager : MonoBehaviour
 
     void P2Input()
     {
-        insLocationTrigger = insInputAI.locationTrigger(validSlots);
-        IsValid();
+        if(GameManager.gameEnded == false)
+        {
+            insLocationTrigger = insInputAI.locationTrigger(validSlots);
+            IsValid();
+        }
     }
 
     void IsValid()
