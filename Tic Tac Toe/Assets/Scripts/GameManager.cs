@@ -7,7 +7,10 @@ public class GameManager : MonoBehaviour
     public static bool gameEnded = false;
 
     [SerializeField] GameObject insCross;
+    [SerializeField] GameObject insCrossWin;
+
     [SerializeField] GameObject insCircle;
+    [SerializeField] GameObject insCircleWin;
 
     int[] gameBoard = new int[9]
     {
@@ -73,21 +76,112 @@ public class GameManager : MonoBehaviour
         var DL1 = (gameBoard[0] & gameBoard[4] & gameBoard[8]);
         var DL2 = (gameBoard[2] & gameBoard[4] & gameBoard[6]);
 
-        if(HL1 == 1 || HL2 == 1 || HL3 == 1 
-            || VL1 == 1 || VL2 == 1 || VL3 == 1 
-            || DL1 == 1 || DL2 == 1 )
+    //--------------------------------------------------------------------------
+        if(HL1 == 1)
         {
-            Debug.Log("Player 1 WON!");
+            Debug.Log("Player 1 Won!");
             gameEnded = true;
+            Instantiate(insCrossWin, new Vector2(0,2), Quaternion.Euler(0,0,90));
+        }
+        if(HL2 == 1)
+        {
+            Debug.Log("Player 1 Won!");
+            gameEnded = true;
+            Instantiate(insCrossWin, new Vector2(0,0), Quaternion.Euler(0,0,90));
+        }
+        if(HL3 == 1)
+        {
+            Debug.Log("Player 1 Won!");
+            gameEnded = true;
+            Instantiate(insCrossWin, new Vector2(0,-2), Quaternion.Euler(0,0,90));
         }
 
-        
-        if(HL1 == 2 || HL2 == 2 || HL3 == 2 
-            || VL1 == 2 || VL2 == 2 || VL3 == 2 
-            || DL1 == 2 || DL2 == 2 )
+    //------
+        if(VL1 == 1)
         {
-            Debug.Log("Player 2 WON!");
+            Debug.Log("Player 1 Won!");
             gameEnded = true;
+            Instantiate(insCrossWin, new Vector2(-2,0), Quaternion.Euler(0,0,0));
+        }
+        if(VL2 == 1)
+        {
+            Debug.Log("Player 1 Won!");
+            gameEnded = true;
+            Instantiate(insCrossWin, new Vector2(0,0), Quaternion.Euler(0,0,0));
+        }
+        if(VL3 == 1)
+        {
+            Debug.Log("Player 1 Won!");
+            gameEnded = true;
+            Instantiate(insCrossWin, new Vector2(2,0), Quaternion.Euler(0,0,0));
+        }
+
+    //------
+        if(DL1 == 1)
+        {
+            Debug.Log("Player 1 Won!");
+            gameEnded = true;
+            Instantiate(insCrossWin, new Vector2(0,0), Quaternion.Euler(0,0,45));
+        }
+        if(DL2 == 1)
+        {
+            Debug.Log("Player 1 Won!");
+            gameEnded = true;
+            Instantiate(insCrossWin, new Vector2(0,0), Quaternion.Euler(0,0,-45));
+        }
+
+    //--------------------------------------------------------------------------
+        if(HL1 == 2)
+        {
+            Debug.Log("Player 2 Won!");
+            gameEnded = true;
+            Instantiate(insCircleWin, new Vector2(0,2), Quaternion.Euler(0,0,90));
+        }
+        if(HL2 == 2)
+        {
+            Debug.Log("Player 2 Won!");
+            gameEnded = true;
+            Instantiate(insCircleWin, new Vector2(0,0), Quaternion.Euler(0,0,90));
+        }
+        if(HL3 == 2)
+        {
+            Debug.Log("Player 2 Won!");
+            gameEnded = true;
+            Instantiate(insCircleWin, new Vector2(0,-2), Quaternion.Euler(0,0,90));
+        }
+
+    //------
+        if(VL1 == 2)
+        {
+            Debug.Log("Player 2 Won!");
+            gameEnded = true;
+            Instantiate(insCircleWin, new Vector2(-2,0), Quaternion.Euler(0,0,0));
+        }
+        if(VL2 == 2)
+        {
+            Debug.Log("Player 2 Won!");
+            gameEnded = true;
+            Instantiate(insCircleWin, new Vector2(0,0), Quaternion.Euler(0,0,0));
+        }
+        if(VL3 == 2)
+        {
+            Debug.Log("Player 2 Won!");
+            gameEnded = true;
+            Instantiate(insCircleWin, new Vector2(2,0), Quaternion.Euler(0,0,0));
+        }
+
+    //------
+        if(DL1 == 2)
+        {
+            Debug.Log("Player 2 Won!");
+            gameEnded = true;
+            Instantiate(insCircleWin, new Vector2(0,0), Quaternion.Euler(0,0,45));
+        }
+        if(DL2 == 2)
+        {
+            Debug.Log("Player 2 Won!");
+            gameEnded = true;
+            Instantiate(insCircleWin, new Vector2(0,0), Quaternion.Euler(0,0,-45));
         }
     }
 }
