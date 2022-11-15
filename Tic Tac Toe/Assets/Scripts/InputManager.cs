@@ -12,6 +12,7 @@ public class InputManager : MonoBehaviour
     int insLocationTrigger = 10;
     List<int> validSlots = new List<int>();
     string playerTurn = "Default";
+    int insPlayerCount;
 
     void Start()
     {
@@ -22,21 +23,24 @@ public class InputManager : MonoBehaviour
         {
             validSlots.Add(i);
         }
-        playerTurn = "P1";
+
+        
+
+        playerTurn = "Cross";
     }
 
-    public void P1Input(int locationTrigger)
+    public void CrossInput(int locationTrigger)
     {
-        if(playerTurn.Equals("P1") & GameManager.gameEnded == false)
+        if(playerTurn.Equals("Cross") & GameManager.gameEnded == false)
         {
             insLocationTrigger = locationTrigger;
             IsValid();
         }
     }
 
-    void P2Input()
+    void CircleInput()
     {
-        if(GameManager.gameEnded == false)
+        if(GameManager.gameEnded == false && insPlayerCount == 0);
         {
             insLocationTrigger = insInputAI.locationTrigger(validSlots);
             IsValid();
@@ -52,14 +56,14 @@ public class InputManager : MonoBehaviour
                 insGameManager.InputLocation(insLocationTrigger,playerTurn);
                 validSlots.Remove(i);
 
-                if(playerTurn.Equals("P1"))
+                if(playerTurn.Equals("Cross"))
                 {
-                    playerTurn = "P2";
-                    P2Input();
+                    playerTurn = "Circle";
+                    CircleInput();
                 }
                 else
                 {
-                    playerTurn = "P1";
+                    playerTurn = "Cross";
                 }
 
                 break;

@@ -47,7 +47,7 @@ public class GameManager : MonoBehaviour
 
     void DisplayData()
     {
-        if(PlayerID == "P1")
+        if(PlayerID == "Cross")
         {
             Instantiate(insCross,possibleSlots[selectedLocation], Quaternion.identity);
 

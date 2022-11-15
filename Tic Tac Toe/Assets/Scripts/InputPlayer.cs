@@ -20,7 +20,7 @@ public class InputPlayer : MonoBehaviour
         {
             locationTrigger = System.Convert.ToInt32(this.gameObject.name);
 
-            insInputManager.P1Input(locationTrigger);
+            insInputManager.CrossInput(locationTrigger);
         }
     }
 }
