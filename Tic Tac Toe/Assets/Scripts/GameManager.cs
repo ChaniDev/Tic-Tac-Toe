@@ -7,6 +7,7 @@ using TMPro;
 public class GameManager : MonoBehaviour
 {
     public static bool gameEnded = false;
+    int turnCounter = 0;
 
     int playerCount = 0;
 
@@ -89,6 +90,8 @@ public class GameManager : MonoBehaviour
             
             gameBoard[selectedLocation] = 2;
         }
+
+        turnCounter = turnCounter + 1;
 
         CheckBoard();
     }
@@ -197,6 +200,12 @@ public class GameManager : MonoBehaviour
             CircleWon();
             Instantiate(insCircleWin, new Vector2(0,0), Quaternion.Euler(0,0,-45));
         }
+
+    //-----------------------------------------------------------------------------
+        if(turnCounter == 8)
+        {
+            GameDraw();
+        }
     }
 
     void CrossWon()
@@ -208,7 +217,7 @@ public class GameManager : MonoBehaviour
 
         gameEnded = true;
 
-        BoardReset();
+        Invoke("BoardReset",2);
     }
 
     void CircleWon()
@@ -220,11 +229,18 @@ public class GameManager : MonoBehaviour
 
         gameEnded = true;
 
-        BoardReset();
+        Invoke("BoardReset",2);
+    }
+
+    void GameDraw()
+    {
+        Debug.Log("Game ended in a Draw!");
+        Invoke("BoardReset",2);
     }
 
     void BoardReset()
     {
+        gameEnded = false;
         SceneManager.LoadScene("GameScene");
     }
 }
