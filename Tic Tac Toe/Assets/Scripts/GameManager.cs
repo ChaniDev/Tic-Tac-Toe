@@ -48,7 +48,7 @@ public class GameManager : MonoBehaviour
     {
         insCrossScores = GameObject.Find("CrossScores");
         insCircleScores = GameObject.Find("CircleScores");
-
+        
         ScoreHandler();
     }
 
@@ -217,7 +217,7 @@ public class GameManager : MonoBehaviour
 
         gameEnded = true;
 
-        Invoke("BoardReset",2);
+        Invoke("BoardReset",3);
     }
 
     void CircleWon()
@@ -229,13 +229,13 @@ public class GameManager : MonoBehaviour
 
         gameEnded = true;
 
-        Invoke("BoardReset",2);
+        Invoke("BoardReset",3);
     }
 
     void GameDraw()
     {
         Debug.Log("Game ended in a Draw!");
-        Invoke("BoardReset",2);
+        Invoke("BoardReset",3);
     }
 
     void BoardReset()
