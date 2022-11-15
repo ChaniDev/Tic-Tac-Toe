@@ -10,9 +10,9 @@ public class GameManager : MonoBehaviour
 //-----
 
     public static bool gameEnded = false;
+    bool matchFound = false;
     int turnCounter = 0;
-
-    int playerCount = 0;
+    int playerCount = 1;
 
     [SerializeField] GameObject insCross;
     [SerializeField] GameObject insCrossWin;
@@ -47,18 +47,13 @@ public class GameManager : MonoBehaviour
         new Vector2(2,-2)
         };
 
-
-
     void Start()
     {
         insInputManager = FindObjectOfType<InputManager>();
-    }
 
-    void Awake()
-    {
         insCrossScores = GameObject.Find("CrossScores");
         insCircleScores = GameObject.Find("CircleScores");
-        
+
         ScoreHandler();
     }
 
@@ -128,16 +123,19 @@ public class GameManager : MonoBehaviour
     //--------------------------------------------------------------------------
         if(HL1 == 1)
         {
+            matchFound = true;
             CrossWon();
             Instantiate(insCrossWin, new Vector2(0,2), Quaternion.Euler(0,0,90));
         }
         if(HL2 == 1)
         {
+            matchFound = true;
             CrossWon();
             Instantiate(insCrossWin, new Vector2(0,0), Quaternion.Euler(0,0,90));
         }
         if(HL3 == 1)
         {
+            matchFound = true;
             CrossWon();
             Instantiate(insCrossWin, new Vector2(0,-2), Quaternion.Euler(0,0,90));
         }
@@ -145,16 +143,19 @@ public class GameManager : MonoBehaviour
     //------
         if(VL1 == 1)
         {
+            matchFound = true;
             CrossWon();
             Instantiate(insCrossWin, new Vector2(-2,0), Quaternion.Euler(0,0,0));
         }
         if(VL2 == 1)
         {
+            matchFound = true;
             CrossWon();
             Instantiate(insCrossWin, new Vector2(0,0), Quaternion.Euler(0,0,0));
         }
         if(VL3 == 1)
         {
+            matchFound = true;
             CrossWon();
             Instantiate(insCrossWin, new Vector2(2,0), Quaternion.Euler(0,0,0));
         }
@@ -162,11 +163,13 @@ public class GameManager : MonoBehaviour
     //------
         if(DL1 == 1)
         {
+            matchFound = true;
             CrossWon();
             Instantiate(insCrossWin, new Vector2(0,0), Quaternion.Euler(0,0,45));
         }
         if(DL2 == 1)
         {
+            matchFound = true;
             CrossWon();
             Instantiate(insCrossWin, new Vector2(0,0), Quaternion.Euler(0,0,-45));
         }
@@ -174,16 +177,19 @@ public class GameManager : MonoBehaviour
     //--------------------------------------------------------------------------
         if(HL1 == 2)
         {
+            matchFound = true;
             CircleWon();
             Instantiate(insCircleWin, new Vector2(0,2), Quaternion.Euler(0,0,90));
         }
         if(HL2 == 2)
         {
+            matchFound = true;
             CircleWon();
             Instantiate(insCircleWin, new Vector2(0,0), Quaternion.Euler(0,0,90));
         }
         if(HL3 == 2)
         {
+            matchFound = true;
             CircleWon();
             Instantiate(insCircleWin, new Vector2(0,-2), Quaternion.Euler(0,0,90));
         }
@@ -191,16 +197,19 @@ public class GameManager : MonoBehaviour
     //------
         if(VL1 == 2)
         {
+            matchFound = true;
             CircleWon();
             Instantiate(insCircleWin, new Vector2(-2,0), Quaternion.Euler(0,0,0));
         }
         if(VL2 == 2)
         {
+            matchFound = true;
             CircleWon();
             Instantiate(insCircleWin, new Vector2(0,0), Quaternion.Euler(0,0,0));
         }
         if(VL3 == 2)
         {
+            matchFound = true;
             CircleWon();
             Instantiate(insCircleWin, new Vector2(2,0), Quaternion.Euler(0,0,0));
         }
@@ -208,17 +217,19 @@ public class GameManager : MonoBehaviour
     //------
         if(DL1 == 2)
         {
+            matchFound = true;
             CircleWon();
             Instantiate(insCircleWin, new Vector2(0,0), Quaternion.Euler(0,0,45));
         }
         if(DL2 == 2)
         {
+            matchFound = true;
             CircleWon();
             Instantiate(insCircleWin, new Vector2(0,0), Quaternion.Euler(0,0,-45));
         }
 
     //-----------------------------------------------------------------------------
-        if(turnCounter == 8)
+        if(turnCounter == 9 & matchFound == false)
         {
             GameDraw();
         }
@@ -251,23 +262,31 @@ public class GameManager : MonoBehaviour
     void GameDraw()
     {
         Debug.Log("Game ended in a Draw!");
+
+        gameEnded = true;
+
         Invoke("BoardReset",3);
+
     }
 
     void BoardReset()
     {
         gameEnded = false;
         PlayerID = "default";
-        
-        foreach(int i in gameBoard)
-        {
-            gameBoard[i] = 0;
-        }
+        turnCounter = 0;
+        matchFound = false;
 
         foreach(GameObject i in tempHolder)
         {
             Destroy(i);
         }
+
+        for(int i = 0; i < gameBoard.Length; i++)
+        {
+            gameBoard[i] = 0;
+        }
+
+        tempHolder.Clear();
 
         insInputManager.Reset();
 

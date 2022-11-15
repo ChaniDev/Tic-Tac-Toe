@@ -38,6 +38,8 @@ public class InputManager : MonoBehaviour
         {
             validSlots.Add(i);
         }
+
+        playerTurn = "Cross";
     }
 
     public void PlayerInput(int locationTrigger)
