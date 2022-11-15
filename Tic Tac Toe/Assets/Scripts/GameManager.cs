@@ -11,12 +11,14 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] GameObject insCross;
     [SerializeField] GameObject insCrossWin;
+    GameObject insCrossScores;
 
     [SerializeField] GameObject insCircle;
     [SerializeField] GameObject insCircleWin;
+    GameObject insCircleScores;
 
-    string player1Score = "0";
-    string player2Score = "0";
+    int player1Score = 0;
+    int player2Score = 0;
 
     int[] gameBoard = new int[9]
     {
@@ -42,14 +44,16 @@ public class GameManager : MonoBehaviour
 
     void Awake()
     {
-        GameObject insCrossScores = GameObject.Find("CrossScores");
-        GameObject insCircleScores = GameObject.Find("CircleScores");
+        insCrossScores = GameObject.Find("CrossScores");
+        insCircleScores = GameObject.Find("CircleScores");
+    }
 
-        player1Score = "69";
-        player2Score = "96";
-
-        insCrossScores.GetComponent<TMP_Text>().text = player1Score;
-        insCircleScores.GetComponent<TMP_Text>().text = player2Score;
+    void ScoreHandler()
+    {
+        insCrossScores.GetComponent<TMP_Text>().text = 
+            System.Convert.ToString(player1Score);
+        insCircleScores.GetComponent<TMP_Text>().text = 
+            System.Convert.ToString(player2Score);
     }
 
     public int PlayerAmount()
@@ -195,12 +199,20 @@ public class GameManager : MonoBehaviour
     void CrossWon()
     {
         Debug.Log("Player Cross Won!");
+
+        player1Score = player1Score + 1;
+        ScoreHandler();
+
         gameEnded = true;
     }
 
     void CircleWon()
     {
         Debug.Log("Player Circle Won!");
+
+        player2Score = player2Score + 1;
+        ScoreHandler();
+
         gameEnded = true;
     }
 }
