@@ -6,11 +6,16 @@ public class GameManager : MonoBehaviour
 {
     public static bool gameEnded = false;
 
+    int playerCount = 0;
+
     [SerializeField] GameObject insCross;
     [SerializeField] GameObject insCrossWin;
 
     [SerializeField] GameObject insCircle;
     [SerializeField] GameObject insCircleWin;
+
+    int player1Score = 0;
+    int player2Score = 0;
 
     int[] gameBoard = new int[9]
     {
@@ -33,6 +38,24 @@ public class GameManager : MonoBehaviour
         new Vector2(0,-2),
         new Vector2(2,-2)
         };
+
+    void Awake()
+    {
+        TextMesh insCrossScore = GameObject.Find("/Canvas/CrossScores")
+            .GetComponent<TextMesh>();
+        TextMesh insCircleScore = GameObject.Find("/Canvas/CircleScores")
+            .GetComponent<TextMesh>();
+
+        player1Score = 69;
+        player2Score = 96;
+
+        
+    }
+
+    public int PlayerAmount()
+    {
+        return (playerCount);
+    }
 
     public void InputLocation(int insLocationTrigger, string playerTurn)
     {
