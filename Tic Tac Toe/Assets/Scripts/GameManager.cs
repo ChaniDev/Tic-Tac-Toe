@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 using TMPro;
 
@@ -46,6 +47,8 @@ public class GameManager : MonoBehaviour
     {
         insCrossScores = GameObject.Find("CrossScores");
         insCircleScores = GameObject.Find("CircleScores");
+
+        ScoreHandler();
     }
 
     void ScoreHandler()
@@ -204,6 +207,8 @@ public class GameManager : MonoBehaviour
         ScoreHandler();
 
         gameEnded = true;
+
+        BoardReset();
     }
 
     void CircleWon()
@@ -214,5 +219,12 @@ public class GameManager : MonoBehaviour
         ScoreHandler();
 
         gameEnded = true;
+
+        BoardReset();
+    }
+
+    void BoardReset()
+    {
+        SceneManager.LoadScene("GameScene");
     }
 }
