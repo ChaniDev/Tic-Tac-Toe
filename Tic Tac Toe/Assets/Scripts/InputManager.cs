@@ -46,7 +46,7 @@ public class InputManager : MonoBehaviour
     {
         if(playerTurn.Equals("Cross") & GameManager.gameEnded == false)
         {
-            insLocationTrigger = locationTrigger;
+            insLocationTrigger = locationTrigger; 
             IsValid();
         }
 
