@@ -6,6 +6,9 @@ using TMPro;
 
 public class GameManager : MonoBehaviour
 {
+    InputManager insInputManager;
+//-----
+
     public static bool gameEnded = false;
     int turnCounter = 0;
 
@@ -28,7 +31,7 @@ public class GameManager : MonoBehaviour
         0,0,0,
         0,0,0
     };
-
+    List<GameObject> tempHolder = new List<GameObject>();
     int selectedLocation = 10;
     string PlayerID = "default";
 
@@ -43,6 +46,13 @@ public class GameManager : MonoBehaviour
         new Vector2(0,-2),
         new Vector2(2,-2)
         };
+
+
+
+    void Start()
+    {
+        insInputManager = FindObjectOfType<InputManager>();
+    }
 
     void Awake()
     {
@@ -80,14 +90,20 @@ public class GameManager : MonoBehaviour
     {
         if(PlayerID == "Cross")
         {
-            Instantiate(insCross,possibleSlots[selectedLocation], Quaternion.identity);
+            GameObject Cross =
+                Instantiate(insCross,possibleSlots[selectedLocation], Quaternion.identity);
+
+            tempHolder.Add(Cross);
 
             gameBoard[selectedLocation] = 1;
         }
         else
         {
-            Instantiate(insCircle,possibleSlots[selectedLocation], Quaternion.identity);
+            GameObject Circle =
+                Instantiate(insCircle,possibleSlots[selectedLocation], Quaternion.identity);
             
+            tempHolder.Add(Circle);
+
             gameBoard[selectedLocation] = 2;
         }
 
@@ -241,6 +257,21 @@ public class GameManager : MonoBehaviour
     void BoardReset()
     {
         gameEnded = false;
-        SceneManager.LoadScene("GameScene");
+        PlayerID = "default";
+        
+        foreach(int i in gameBoard)
+        {
+            gameBoard[i] = 0;
+        }
+
+        foreach(GameObject i in tempHolder)
+        {
+            Destroy(i);
+        }
+
+        insInputManager.Reset();
+
+        Destroy(GameObject.Find("Cross Win(Clone)"));
+        Destroy(GameObject.Find("Circle Win(Clone)"));
     }
 }

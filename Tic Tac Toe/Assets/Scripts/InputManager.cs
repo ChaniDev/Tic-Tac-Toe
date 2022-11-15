@@ -29,6 +29,17 @@ public class InputManager : MonoBehaviour
         playerTurn = "Cross";
     }
 
+    public void Reset()
+    {
+        validSlots.Clear();
+
+        insLocationTrigger = 10;
+        for(int i = 0; i < 9; i++)
+        {
+            validSlots.Add(i);
+        }
+    }
+
     public void PlayerInput(int locationTrigger)
     {
         if(playerTurn.Equals("Cross") & GameManager.gameEnded == false)
