@@ -62,6 +62,9 @@ public class GameManager : MonoBehaviour
         insCrossScores = GameObject.Find("CrossScores");
         insCircleScores = GameObject.Find("CircleScores");
 
+        insPlayer1Name = GameObject.Find("Player 1");
+        insPlayer2Name = GameObject.Find("Player 2");
+
         ScoreHandler();
     }
 
@@ -72,9 +75,14 @@ public class GameManager : MonoBehaviour
         insCircleScores.GetComponent<TMP_Text>().text = 
             System.Convert.ToString(player2Score);
     }
-    void NameHandler()
+    void NameSwitch()
     {
         
+
+        insPlayer1Name.GetComponent<TMP_Text>().text = 
+            System.Convert.ToString("Dod");
+        insPlayer1Name.GetComponent<TMP_Text>().text = 
+            System.Convert.ToString("Cat");
     }
 
     public int PlayerAmount()

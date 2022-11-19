@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 86903151}
   - component: {fileID: 86903150}
   m_Layer: 5
-  m_Name: ChaniDev
+  m_Name: Player 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2173,7 +2173,7 @@ GameObject:
   - component: {fileID: 2034104607}
   - component: {fileID: 2034104606}
   m_Layer: 5
-  m_Name: Unity
+  m_Name: Player 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
