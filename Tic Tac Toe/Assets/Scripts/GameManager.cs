@@ -26,7 +26,9 @@ public class GameManager : MonoBehaviour
     GameObject insCircleScores;
 
     int player1Score = 0;
+    GameObject insPlayer1Name;
     int player2Score = 0;
+    GameObject insPlayer2Name;
 
     int gameTurn = 0;
 
@@ -69,6 +71,10 @@ public class GameManager : MonoBehaviour
             System.Convert.ToString(player1Score);
         insCircleScores.GetComponent<TMP_Text>().text = 
             System.Convert.ToString(player2Score);
+    }
+    void NameHandler()
+    {
+        
     }
 
     public int PlayerAmount()
@@ -275,7 +281,13 @@ public class GameManager : MonoBehaviour
 
     void TurnSwitch()
     {
-        print("COWWWWW- TurnSwitch");
+        int  x = player1Score;
+        int  y = player2Score;
+
+        player1Score = y;
+        player2Score = x;
+
+        ScoreHandler();
     }
 
     void CrossWon()
@@ -322,6 +334,7 @@ public class GameManager : MonoBehaviour
         if(gameTurn > 4)
         {
             TurnSwitch();
+            gameTurn = 0;
         }
 
         gameEnded = false;
