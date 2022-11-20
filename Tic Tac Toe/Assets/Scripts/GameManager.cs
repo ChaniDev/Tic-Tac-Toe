@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
     public static bool gameEnded = false;
     bool matchFound = false;
     int turnCounter = 0;
-    int playerCount = 1;
+    int playerCount = 0;
 
     string playerOneName = "-Unity";
     string playerTwoName = "-ChaniDev";
@@ -77,12 +77,14 @@ public class GameManager : MonoBehaviour
     }
     void NameSwitch()
     {
-        
+        string player2 = insPlayer2Name.GetComponent<TMP_Text>().text; 
+        string player1 = insPlayer1Name.GetComponent<TMP_Text>().text;
 
         insPlayer1Name.GetComponent<TMP_Text>().text = 
-            System.Convert.ToString("Dod");
-        insPlayer1Name.GetComponent<TMP_Text>().text = 
-            System.Convert.ToString("Cat");
+            System.Convert.ToString(player2);
+
+        insPlayer2Name.GetComponent<TMP_Text>().text = 
+            System.Convert.ToString(player1);
     }
 
     public int PlayerAmount()
@@ -296,6 +298,7 @@ public class GameManager : MonoBehaviour
         player2Score = x;
 
         ScoreHandler();
+        NameSwitch();
     }
 
     void CrossWon()
