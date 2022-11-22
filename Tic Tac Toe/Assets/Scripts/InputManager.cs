@@ -38,7 +38,6 @@ public class InputManager : MonoBehaviour
         lastTurn = "Player";
 
         turnCount++;
-        TurnManager();
     }
     void RequestAIInput()
     {
@@ -50,7 +49,7 @@ public class InputManager : MonoBehaviour
         TurnManager();
     }
 
-    void TurnManager()
+    public void TurnManager()
     {
         if(turnCount > 8)
         {
@@ -58,11 +57,11 @@ public class InputManager : MonoBehaviour
         }
         else if(lastTurn == "Player" & !gameEnded)
         {
-            RequestAIInput();
+            Invoke("RequestAIInput()",1f);
         }
         else if(lastTurn == "AI" & !gameEnded)
         {
-            RequestPlayerInput();
+            Invoke("RequestPlayerInput()",1f);
         }
         else
         {

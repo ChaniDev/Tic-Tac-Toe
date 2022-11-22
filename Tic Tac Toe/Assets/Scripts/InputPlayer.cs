@@ -4,20 +4,25 @@ using UnityEngine;
 
 public class InputPlayer : MonoBehaviour
 {
-    bool enableInput = false;
+    InputManager insInputManager;
 
-    void Update()
+    void Start()
     {
-        if(Input.GetKeyDown(KeyCode.Mouse0) & enableInput)
-        {
-            Debug.Log("HIT");
-
-            enableInput = false;
-        }
-    } 
+        insInputManager = FindObjectOfType<InputManager>();
+    }
 
     public void turnPlayer()
     {
-        enableInput = true;
+        StartCoroutine(RequestInput());
+    }
+    private IEnumerator RequestInput()
+    {
+        while(!Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            yield return null;
+        }
+
+        Debug.Log("Input By Player");
+        insInputManager.TurnManager();
     }
 }
