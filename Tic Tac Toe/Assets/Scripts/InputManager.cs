@@ -32,7 +32,7 @@ public class InputManager : MonoBehaviour
 
     void RequestPlayerInput()
     {
-        Debug.Log("Player");
+        Debug.Log("Turn - Player");
         insInputPlayer.turnPlayer();
 
         lastTurn = "Player";
@@ -41,7 +41,7 @@ public class InputManager : MonoBehaviour
     }
     void RequestAIInput()
     {
-        Debug.Log("AI");
+        Debug.Log("Turn - AI");
 
         lastTurn = "AI";
 
@@ -57,11 +57,11 @@ public class InputManager : MonoBehaviour
         }
         else if(lastTurn == "Player" & !gameEnded)
         {
-            Invoke("RequestAIInput()",1f);
+            Invoke("RequestAIInput",1f);
         }
         else if(lastTurn == "AI" & !gameEnded)
         {
-            Invoke("RequestPlayerInput()",1f);
+            Invoke("RequestPlayerInput",1f);
         }
         else
         {

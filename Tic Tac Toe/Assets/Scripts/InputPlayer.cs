@@ -22,7 +22,7 @@ public class InputPlayer : MonoBehaviour
             yield return null;
         }
 
-        Debug.Log("Input By Player");
+        Debug.Log("--Input By Player--");
         insInputManager.TurnManager();
     }
 }
