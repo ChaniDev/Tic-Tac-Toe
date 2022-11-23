@@ -16,7 +16,7 @@ public class InputManager : MonoBehaviour
             0,0,0,
         };
 
-    bool playerIsCross = false;
+    bool playerIsCross = true;
     bool gameEnded = false;
     string lastTurn;
     int turnCount = 0;
@@ -38,11 +38,11 @@ public class InputManager : MonoBehaviour
     {
         if(playerIsCross)
         {
-            Invoke("RequestPlayerInput",1f);
+            Invoke("RequestPlayerInput",0.5f);
         }
         else
         {
-            Invoke("RequestAIInput",1f);
+            Invoke("RequestAIInput",0.8f);
         }
     }
 
@@ -75,11 +75,11 @@ public class InputManager : MonoBehaviour
         }
         else if(lastTurn == "Player" & !gameEnded)
         {
-            Invoke("RequestAIInput",1f);
+            Invoke("RequestAIInput",0.8f);
         }
         else if(lastTurn == "AI" & !gameEnded)
         {
-            Invoke("RequestPlayerInput",1f);
+            Invoke("RequestPlayerInput",0.5f);
         }
         else
         {
