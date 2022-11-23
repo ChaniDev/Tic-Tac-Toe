@@ -8,7 +8,6 @@ public class InputPlayer : MonoBehaviour
     InputManager insInputManager;
 
     bool enableInput = false;
-    string buttonName = "100";
 
     void Start()
     {
@@ -24,9 +23,28 @@ public class InputPlayer : MonoBehaviour
     {
         if(enableInput)
         {
-            // enableInput = false;
-            buttonName = EventSystem.current.currentSelectedGameObject.name;
-            print (buttonName);
+            int buttonName = System.Convert.ToInt32(
+                EventSystem.current.currentSelectedGameObject.name);
+
+            IfValid(buttonName);
         }
     } 
+
+    void IfValid(int insButtonName)
+    {
+        foreach(int i in InputManager.validSlotID)
+        {
+            print(i);
+
+            if(insButtonName.Equals(i))
+            {
+                InputManager.validSlotID.Remove(i);
+
+                enableInput = false;
+                insInputManager.TurnManager();
+
+                break;
+            }
+        }
+    }
 }
