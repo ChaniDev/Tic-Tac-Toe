@@ -948,6 +948,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Cross: {fileID: 1672718233317779589, guid: a7a362ae716c2584ebee324614210c04, type: 3}
+  Circle: {fileID: 5242615781030353960, guid: c13e81451b2180a47ad744e23b3bd865, type: 3}
 --- !u!4 &395402936
 Transform:
   m_ObjectHideFlags: 0
