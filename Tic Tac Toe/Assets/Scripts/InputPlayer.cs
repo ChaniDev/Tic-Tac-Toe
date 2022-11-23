@@ -34,8 +34,6 @@ public class InputPlayer : MonoBehaviour
     {
         foreach(int i in InputManager.validSlotID)
         {
-            print(i);
-
             if(insButtonName.Equals(i))
             {
                 InputManager.validSlotID.Remove(i);
