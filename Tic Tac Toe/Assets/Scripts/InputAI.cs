@@ -15,7 +15,7 @@ public class InputAI : MonoBehaviour
 
     public void RequestInput()
     {
-        int i=0;
+        int i = Random.Range(0,9); 
         insInputManager.TurnManager(i,PlayerID);
     }
 

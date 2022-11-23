@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
     InputManager insInputManager;
 
     [SerializeField] private GameObject Cross;
+    [SerializeField] private GameObject Circle;
 
     void Start()
     {
