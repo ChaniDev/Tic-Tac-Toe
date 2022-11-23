@@ -6,7 +6,7 @@ public class InputAI : MonoBehaviour
 {
     InputManager insInputManager;
 
-    int PlayerID = 1;
+    int playerID = 1;
 
     void Start()
     {
@@ -15,8 +15,6 @@ public class InputAI : MonoBehaviour
 
     public void RequestInput()
     {
-        int i = Random.Range(0,9); 
-        insInputManager.TurnManager(i,PlayerID);
+        Debug.Log("YEs");
     }
-
 }

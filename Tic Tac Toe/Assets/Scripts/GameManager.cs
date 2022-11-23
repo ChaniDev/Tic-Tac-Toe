@@ -9,6 +9,19 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject Cross;
     [SerializeField] private GameObject Circle;
 
+    Vector2[] plotLocation = new Vector2[]
+        {
+            new Vector2(-2,2),
+            new Vector2(0,2),
+            new Vector2(2,2),
+            new Vector2(-2,0),
+            new Vector2(0,0),
+            new Vector2(2,0),
+            new Vector2(-2,-2),
+            new Vector2(0,-2),
+            new Vector2(2,-2),
+        };
+
     void Start()
     {
         insInputManager = FindObjectOfType<InputManager>();
@@ -21,8 +34,31 @@ public class GameManager : MonoBehaviour
         insInputManager.TriggerStartTurn();
     }
 
-    public void DisplayHandler(int insSelectedLocation, int insPlayerID)
+    public void DisplayHandler(int insSelectedLocation, 
+        int insPlayerID, bool insPlayerIsCross)
     {
-        Instantiate(Cross, new Vector2(0,0), Quaternion.identity);
+        if(insPlayerIsCross == true)
+        {
+            if(insPlayerID == 0)
+            {
+                Instantiate(Cross, plotLocation[insSelectedLocation], Quaternion.identity);
+            }
+            else
+            {
+                Instantiate(Circle, plotLocation[insSelectedLocation], Quaternion.identity);
+            }
+        }
+        else
+        {
+            if(insPlayerID == 1)
+            {
+                Instantiate(Cross, plotLocation[insSelectedLocation], Quaternion.identity);
+            }
+            else
+            {
+                Instantiate(Circle, plotLocation[insSelectedLocation], Quaternion.identity);
+            }
+        }
+        
     }
 }
