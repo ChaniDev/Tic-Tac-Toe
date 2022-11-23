@@ -16,7 +16,7 @@ public class InputManager : MonoBehaviour
             0,0,0,
         };
 
-    bool playerIsCross = true;
+    bool playerIsCross = false;
     bool gameEnded = false;
     string lastTurn;
     int turnCount = 0;
@@ -38,11 +38,11 @@ public class InputManager : MonoBehaviour
     {
         if(playerIsCross)
         {
-            RequestPlayerInput();
+            Invoke("RequestPlayerInput",1f);
         }
         else
         {
-            RequestAIInput();
+            Invoke("RequestAIInput",1f);
         }
     }
 
@@ -65,9 +65,9 @@ public class InputManager : MonoBehaviour
         insInputAI.RequestInput();
     }
 
-    public void TurnManager(int selectedLocation, int PlayerID)
+    public void TurnManager(int selectedLocation, int playerID)
     {
-        insGameManager.DisplayHandler(selectedLocation,PlayerID);
+        insGameManager.DisplayHandler(selectedLocation, playerID ,playerIsCross);
 
         if(turnCount > 8)
         {
@@ -85,6 +85,5 @@ public class InputManager : MonoBehaviour
         {
             Debug.LogError("No Input Request sent* Error in lastTurn variable");
         }
-    }
-    
+    }   
 }
