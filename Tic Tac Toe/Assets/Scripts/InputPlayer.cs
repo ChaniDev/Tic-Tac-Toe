@@ -1,28 +1,32 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class InputPlayer : MonoBehaviour
 {
     InputManager insInputManager;
+
+    bool enableInput = false;
+    string buttonName = "100";
 
     void Start()
     {
         insInputManager = FindObjectOfType<InputManager>();
     }
 
-    public void turnPlayer()
+    public void RequestInput()
     {
-        StartCoroutine(RequestInput());
+        enableInput = true;
     }
-    private IEnumerator RequestInput()
-    {
-        while(!Input.GetKeyDown(KeyCode.Mouse0))
-        {
-            yield return null;
-        }
 
-        Debug.Log("--Input By Player--");
-        insInputManager.TurnManager();
-    }
+    public void ButtonClick()
+    {
+        if(enableInput)
+        {
+            // enableInput = false;
+            buttonName = EventSystem.current.currentSelectedGameObject.name;
+            print (buttonName);
+        }
+    } 
 }

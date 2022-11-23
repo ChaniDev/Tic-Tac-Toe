@@ -7,6 +7,14 @@ public class InputManager : MonoBehaviour
     GameManager insGameManager;
     InputPlayer insInputPlayer;
 
+    public static List<int> validSlotID = new List<int>();
+    public static int[] Board = new int[]
+        {
+            0,0,0,
+            0,0,0,
+            0,0,0,
+        };
+
     bool playerIsCross = true;
     bool gameEnded = false;
     string lastTurn;
@@ -14,6 +22,11 @@ public class InputManager : MonoBehaviour
 
     void Start()
     {
+        for(int i = 0; i < 9; i++)
+        {
+            validSlotID.Add(i);
+        }
+
         insGameManager = FindObjectOfType<GameManager>();
         insInputPlayer = FindObjectOfType<InputPlayer>();
     }
@@ -33,7 +46,7 @@ public class InputManager : MonoBehaviour
     void RequestPlayerInput()
     {
         Debug.Log("Turn - Player");
-        insInputPlayer.turnPlayer();
+        insInputPlayer.RequestInput();
 
         lastTurn = "Player";
 
