@@ -6,7 +6,7 @@ public class GameManager : MonoBehaviour
 {
     InputManager insInputManager;
 
-    
+    [SerializeField] private GameObject Cross;
 
     void Start()
     {
@@ -18,5 +18,10 @@ public class GameManager : MonoBehaviour
     void StartGame()
     {
         insInputManager.TriggerStartTurn();
+    }
+
+    public void DisplayHandler(int insSelectedLocation, int insPlayerID)
+    {
+        Instantiate(Cross, new Vector2(0,0), Quaternion.identity);
     }
 }

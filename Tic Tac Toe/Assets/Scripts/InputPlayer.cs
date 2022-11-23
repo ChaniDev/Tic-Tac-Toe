@@ -8,6 +8,7 @@ public class InputPlayer : MonoBehaviour
     InputManager insInputManager;
 
     bool enableInput = false;
+    int PlayerID = 0;
 
     void Start()
     {
@@ -39,7 +40,7 @@ public class InputPlayer : MonoBehaviour
                 InputManager.validSlotID.Remove(i);
 
                 enableInput = false;
-                insInputManager.TurnManager();
+                insInputManager.TurnManager(i,PlayerID);
 
                 break;
             }

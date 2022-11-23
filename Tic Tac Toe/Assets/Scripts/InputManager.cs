@@ -6,6 +6,7 @@ public class InputManager : MonoBehaviour
 {
     GameManager insGameManager;
     InputPlayer insInputPlayer;
+    InputAI insInputAI;
 
     public static List<int> validSlotID = new List<int>();
     public static int[] Board = new int[]
@@ -28,7 +29,9 @@ public class InputManager : MonoBehaviour
         }
 
         insGameManager = FindObjectOfType<GameManager>();
+
         insInputPlayer = FindObjectOfType<InputPlayer>();
+        insInputAI = FindObjectOfType<InputAI>();
     }
 
     public void TriggerStartTurn()
@@ -46,24 +49,26 @@ public class InputManager : MonoBehaviour
     void RequestPlayerInput()
     {
         Debug.Log("Turn - Player");
-        insInputPlayer.RequestInput();
 
         lastTurn = "Player";
-
         turnCount++;
+        
+        insInputPlayer.RequestInput();
     }
     void RequestAIInput()
     {
         Debug.Log("Turn - AI");
 
         lastTurn = "AI";
-
         turnCount++;
-        TurnManager();
+
+        insInputAI.RequestInput();
     }
 
-    public void TurnManager()
+    public void TurnManager(int selectedLocation, int PlayerID)
     {
+        insGameManager.DisplayHandler(selectedLocation,PlayerID);
+
         if(turnCount > 8)
         {
             gameEnded = true;
