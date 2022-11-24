@@ -20,6 +20,7 @@ public class InputManager : MonoBehaviour
     bool gameEnded = false;
     string lastTurn;
     int turnCount = 0;
+    int gameCounter = 0;
 
     void Start()
     {
@@ -91,6 +92,22 @@ public class InputManager : MonoBehaviour
 
     public void Reset()
     {
+        gameCounter++;
+
+        if(gameCounter > 2  & playerIsCross)
+        {
+            playerIsCross = false;
+            gameCounter = 0;
+
+            insGameManager.PlayerSwitch();
+        }
+        else if(gameCounter > 2 & !playerIsCross)
+        {
+            playerIsCross = true;
+            gameCounter = 0;
+
+            insGameManager.PlayerSwitch();
+        }
         gameEnded = false;
 
         validSlotID.Clear();
@@ -102,6 +119,6 @@ public class InputManager : MonoBehaviour
 
         turnCount = 0;
 
-        TriggerStartTurn();
+        Invoke("TriggerStartTurn",0.8f);
     } 
 }

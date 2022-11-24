@@ -76,4 +76,9 @@ public class GameManager : MonoBehaviour
 
         insInputManager.Reset();
     }
+
+    public void PlayerSwitch()
+    {
+        Debug.Log("Switch");
+    }
 }
