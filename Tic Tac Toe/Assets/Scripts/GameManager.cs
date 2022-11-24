@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject Cross;
     [SerializeField] private GameObject Circle;
 
+    List<GameObject> graphicsHolder = new List<GameObject>();
     Vector2[] plotLocation = new Vector2[]
         {
             new Vector2(-2,2),
@@ -41,24 +42,38 @@ public class GameManager : MonoBehaviour
         {
             if(insPlayerID == 0)
             {
-                Instantiate(Cross, plotLocation[insSelectedLocation], Quaternion.identity);
+                graphicsHolder.Add(
+                Instantiate(Cross, plotLocation[insSelectedLocation], Quaternion.identity));
             }
             else
             {
-                Instantiate(Circle, plotLocation[insSelectedLocation], Quaternion.identity);
+                graphicsHolder.Add(
+                Instantiate(Circle, plotLocation[insSelectedLocation], Quaternion.identity));
             }
         }
         else
         {
             if(insPlayerID == 1)
             {
-                Instantiate(Cross, plotLocation[insSelectedLocation], Quaternion.identity);
+                graphicsHolder.Add(
+                Instantiate(Cross, plotLocation[insSelectedLocation], Quaternion.identity));
             }
             else
             {
-                Instantiate(Circle, plotLocation[insSelectedLocation], Quaternion.identity);
+                graphicsHolder.Add(
+                Instantiate(Circle, plotLocation[insSelectedLocation], Quaternion.identity));
             }
+        }      
+    }
+
+    public void GameReset()
+    {
+        insInputManager.Reset();
+
+        for(int i = 0; i < graphicsHolder.Count-1; i++)
+        {
+            Destroy(graphicsHolder[i]);
         }
-        
+        graphicsHolder.Clear();
     }
 }

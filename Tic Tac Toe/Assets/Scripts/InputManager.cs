@@ -72,6 +72,8 @@ public class InputManager : MonoBehaviour
         if(turnCount > 8)
         {
             gameEnded = true;
+
+            Invoke("insGameManager.GameReset",1f);
         }
         else if(lastTurn == "Player" & !gameEnded)
         {
@@ -85,5 +87,17 @@ public class InputManager : MonoBehaviour
         {
             Debug.LogError("No Input Request sent* Error in lastTurn variable");
         }
-    }   
+    }  
+
+    public void Reset()
+    {
+        gameEnded = false;
+
+        validSlotID.Clear();
+
+        for(int i = 0; i < 9; i++)
+        {
+            validSlotID.Add(i);
+        }
+    } 
 }
