@@ -82,7 +82,7 @@ public class InputManager : MonoBehaviour
         }
         else if(lastTurn == "AI" & !gameEnded)
         {
-            Invoke("RequestPlayerInput",0.5f);
+            Invoke("RequestPlayerInput",0.2f);
         }
         else
         {
