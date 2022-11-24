@@ -68,12 +68,12 @@ public class GameManager : MonoBehaviour
 
     public void GameReset()
     {
-        insInputManager.Reset();
-
-        for(int i = 0; i < graphicsHolder.Count-1; i++)
+        for(int i = 0; i < graphicsHolder.Count; i++)
         {
             Destroy(graphicsHolder[i]);
         }
         graphicsHolder.Clear();
+
+        insInputManager.Reset();
     }
 }

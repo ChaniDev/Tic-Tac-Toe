@@ -73,7 +73,7 @@ public class InputManager : MonoBehaviour
         {
             gameEnded = true;
 
-            Invoke("insGameManager.GameReset",1f);
+            insGameManager.Invoke("GameReset",1f);
         }
         else if(lastTurn == "Player" & !gameEnded)
         {
@@ -99,5 +99,9 @@ public class InputManager : MonoBehaviour
         {
             validSlotID.Add(i);
         }
+
+        turnCount = 0;
+
+        TriggerStartTurn();
     } 
 }
