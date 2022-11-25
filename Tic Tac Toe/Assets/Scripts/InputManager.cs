@@ -49,8 +49,6 @@ public class InputManager : MonoBehaviour
 
     void RequestPlayerInput()
     {
-        Debug.Log("Turn - Player");
-
         lastTurn = "Player";
         turnCount++;
         
@@ -58,8 +56,6 @@ public class InputManager : MonoBehaviour
     }
     void RequestAIInput()
     {
-        Debug.Log("Turn - AI");
-
         lastTurn = "AI";
         turnCount++;
 

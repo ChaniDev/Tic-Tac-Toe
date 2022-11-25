@@ -37,6 +37,8 @@ public class InputPlayer : MonoBehaviour
         {
             if(insButtonName.Equals(i))
             {
+                print("--Player Input--");
+
                 InputManager.validSlotID.Remove(i);
 
                 enableInput = false;

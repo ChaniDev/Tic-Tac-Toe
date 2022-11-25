@@ -25,13 +25,12 @@ public class InputAI : MonoBehaviour
 
     void IfValid(int selectedLocation)
     {
-        Debug.Log("I am in Danger");
-
         foreach(int i in InputManager.validSlotID)
         {
             if(selectedLocation == i)
             {
-                Debug.Log("OutputFound");
+                print("--AI Input--");
+
                 InputManager.validSlotID.Remove(i);
 
                 insInputManager.TurnManager(i,playerID);
