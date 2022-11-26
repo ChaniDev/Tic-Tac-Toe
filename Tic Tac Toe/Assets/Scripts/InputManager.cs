@@ -19,7 +19,7 @@ public class InputManager : MonoBehaviour
     bool playerIsCross = true;
     bool gameEnded = false;
     string lastTurn;
-    int turnCount = 0;
+    public static int turnCount = 0;
     int gameCounter = 0;
 
     void Start()
@@ -69,8 +69,6 @@ public class InputManager : MonoBehaviour
         if(turnCount > 8)
         {
             gameEnded = true;
-
-            insGameManager.Invoke("GameReset",1f);
         }
         else if(lastTurn == "Player" & !gameEnded)
         {
@@ -115,6 +113,11 @@ public class InputManager : MonoBehaviour
 
         turnCount = 0;
 
+        for(int i = 0; i < 9; i++)
+        {
+            Board[i] = 0;
+        }
+
         Invoke("TriggerStartTurn",0.8f);
-    } 
+    }
 }

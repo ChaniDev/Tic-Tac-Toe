@@ -5,6 +5,7 @@ using UnityEngine;
 public class InputAI : MonoBehaviour
 {
     InputManager insInputManager;
+    GameState insGameState;
 
     int playerID = 1;
     bool matchFound = false;
@@ -12,15 +13,62 @@ public class InputAI : MonoBehaviour
     void Start()
     {
         insInputManager = FindObjectOfType<InputManager>();
+        insGameState = FindObjectOfType<GameState>();
     }
 
     public void RequestInput()
     {
         matchFound = false;
+        int moveSelected = 10;
+        int bestMove = -1000;
+        int depthOfTree = 0;
 
-        int r =Random.Range(0,9);
+        for(int i = 0; i < 9; i++)
+        {
+            if(InputManager.Board[i] == 0)
+            {
+                int scoreOfMove = MinMax(InputManager.Board, depthOfTree, false);
 
-        IfValid(r);
+                if(scoreOfMove > bestMove)
+                {
+                    bestMove = scoreOfMove;
+                    moveSelected = i;
+                }
+            }
+        }
+
+        IfValid(moveSelected);
+    }
+
+    int GameResult()
+    {
+        if(GameState.gameResult == "Player")
+        {
+            int score = -1;
+            return(score);
+        }
+        else if(GameState.gameResult == "AI")
+        {
+            int score = 1;
+            return(score);
+        }
+        else
+        {
+            int score = 0;
+            return(score);
+        }
+    } 
+
+    int MinMax(int[] insBoard, int insDepthOfTree, bool isMaximizing)
+    {
+        string insGameResult = insGameState.CheckResult();
+        if(GameState.gameResult != "null")
+        {
+            int score = GameResult();
+            return(score);
+        }
+
+        return(1);
     }
 
     void IfValid(int selectedLocation)
@@ -32,6 +80,7 @@ public class InputAI : MonoBehaviour
                 print("--AI Input--");
 
                 InputManager.validSlotID.Remove(i);
+                InputManager.Board[i] = 2;
 
                 insInputManager.TurnManager(i,playerID);
                 matchFound = true;

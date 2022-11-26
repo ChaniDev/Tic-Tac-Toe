@@ -40,6 +40,7 @@ public class InputPlayer : MonoBehaviour
                 print("--Player Input--");
 
                 InputManager.validSlotID.Remove(i);
+                InputManager.Board[i] = 1;
 
                 enableInput = false;
                 insInputManager.TurnManager(i,playerID);
