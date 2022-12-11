@@ -45,8 +45,6 @@ public class GameManager : MonoBehaviour
     void StartGame()
     {
         insInputManager.TriggerStartTurn();
-
-        
     }
 
     public void DisplayHandler(int insSelectedLocation, 

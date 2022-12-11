@@ -61,7 +61,6 @@ public class InputAI : MonoBehaviour
 
     int MinMax(int[] insBoard, int insDepthOfTree, bool isMaximizing)
     {
-        string insGameResult = insGameState.CheckResult();
         if(GameState.gameResult != "null")
         {
             int score = GameResult();

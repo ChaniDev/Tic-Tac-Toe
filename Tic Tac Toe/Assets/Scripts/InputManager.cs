@@ -39,7 +39,7 @@ public class InputManager : MonoBehaviour
     {
         if(playerIsCross)
         {
-            Invoke("RequestPlayerInput",0.5f);
+            Invoke("RequestPlayerInput",0.2f);
         }
         else
         {
@@ -69,6 +69,7 @@ public class InputManager : MonoBehaviour
         if(turnCount > 8)
         {
             gameEnded = true;
+            insGameManager.Invoke("GameReset",2f);
         }
         else if(lastTurn == "Player" & !gameEnded)
         {
@@ -118,6 +119,6 @@ public class InputManager : MonoBehaviour
             Board[i] = 0;
         }
 
-        Invoke("TriggerStartTurn",0.8f);
+        Invoke("TriggerStartTurn",0.1f);
     }
 }
