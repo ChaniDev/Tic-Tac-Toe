@@ -6,6 +6,6 @@
  
  Can You Beat the AI.
  
- -ChaniDev
+ -ChaniDev-
 
 Made with unity.
