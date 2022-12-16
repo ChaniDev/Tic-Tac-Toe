@@ -65,6 +65,7 @@ public class InputAI : MonoBehaviour
         {
             int score = GameResult();
             return(score);
+            
         }
 
         return(1);
