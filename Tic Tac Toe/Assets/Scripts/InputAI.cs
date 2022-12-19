@@ -8,7 +8,6 @@ public class InputAI : MonoBehaviour
     GameState insGameState;
 
     int playerID = 1;
-    bool matchFound = false;
 
     void Start()
     {
@@ -18,79 +17,40 @@ public class InputAI : MonoBehaviour
 
     public void RequestInput()
     {
-        matchFound = false;
-        int moveSelected = 10;
-        int bestMove = -1000;
-        int depthOfTree = 0;
+        int bestScore = -1000;
+        int bestMove;
+        int selectedLocation = 0;
 
         for(int i = 0; i < 9; i++)
         {
-            if(InputManager.Board[i] == 0)
+            if(InputManager.Board[i] == 0 )
             {
-                int scoreOfMove = MinMax(InputManager.Board, depthOfTree, false);
-
-                if(scoreOfMove > bestMove)
+                int score = MiniMax(InputManager.Board);
+                
+                if (score > bestScore)
                 {
-                    bestMove = scoreOfMove;
-                    moveSelected = i;
+                    bestScore = score;
+                    bestMove = (i);
+                    
+                    selectedLocation = bestMove;
                 }
             }
         }
-
-        IfValid(moveSelected);
+        Output(selectedLocation);
     }
 
-    int GameResult()
+    int MiniMax(int[] gameBoard)
     {
-        if(GameState.gameResult == "Player")
-        {
-            int score = -1;
-            return(score);
-        }
-        else if(GameState.gameResult == "AI")
-        {
-            int score = 1;
-            return(score);
-        }
-        else
-        {
-            int score = 0;
-            return(score);
-        }
-    } 
-
-    int MinMax(int[] insBoard, int insDepthOfTree, bool isMaximizing)
-    {
-        if(GameState.gameResult != "null")
-        {
-            int score = GameResult();
-            return(score);
-            
-        }
-
-        return(1);
+        return 1;
     }
 
-    void IfValid(int selectedLocation)
+    void Output(int selectedLocation)
     {
-        foreach(int i in InputManager.validSlotID)
-        {
-            if(selectedLocation == i)
-            {
-                print("--AI Input--");
+        insInputManager.TurnManager(selectedLocation,playerID);
+        print("--Player Input--");
 
-                InputManager.validSlotID.Remove(i);
-                InputManager.Board[i] = 2;
-
-                insInputManager.TurnManager(i,playerID);
-                matchFound = true;
-                break;
-            }
-        }
-
-        if (!matchFound)
-        {
-            RequestInput();
-        }
+        InputManager.validSlotID.Remove(selectedLocation);
+        InputManager.Board[selectedLocation] = 1;
     }
+    
 }

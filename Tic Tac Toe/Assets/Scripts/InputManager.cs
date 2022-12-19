@@ -7,6 +7,7 @@ public class InputManager : MonoBehaviour
     GameManager insGameManager;
     InputPlayer insInputPlayer;
     InputAI insInputAI;
+    GameState insGameState;
 
     public static List<int> validSlotID = new List<int>();
     public static int[] Board = new int[]
@@ -30,6 +31,7 @@ public class InputManager : MonoBehaviour
         }
 
         insGameManager = FindObjectOfType<GameManager>();
+        insGameState = FindObjectOfType<GameState>();
 
         insInputPlayer = FindObjectOfType<InputPlayer>();
         insInputAI = FindObjectOfType<InputAI>();
