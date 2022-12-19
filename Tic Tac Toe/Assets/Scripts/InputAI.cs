@@ -25,7 +25,9 @@ public class InputAI : MonoBehaviour
         {
             if(InputManager.Board[i] == 0 )
             {
+                InputManager.Board[i] = 2;
                 int score = MiniMax(InputManager.Board);
+                InputManager.Board[i] = 0;
                 
                 if (score > bestScore)
                 {
@@ -50,7 +52,7 @@ public class InputAI : MonoBehaviour
         print("--Player Input--");
 
         InputManager.validSlotID.Remove(selectedLocation);
-        InputManager.Board[selectedLocation] = 1;
+        InputManager.Board[selectedLocation] = 2;
     }
     
 }
