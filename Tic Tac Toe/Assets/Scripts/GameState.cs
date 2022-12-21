@@ -12,4 +12,9 @@ public class GameState : MonoBehaviour
     {
         insGameManager = FindObjectOfType<GameManager>();
     }
+
+    void CheckBoard()
+    {
+
+    }
 }

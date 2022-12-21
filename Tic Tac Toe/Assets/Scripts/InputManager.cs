@@ -73,17 +73,14 @@ public class InputManager : MonoBehaviour
             gameEnded = true;
             insGameManager.Invoke("GameReset",2f);
         }
-        else if(lastTurn == "Player" & !gameEnded)
+
+        if(lastTurn == "Player" & !gameEnded)
         {
             Invoke("RequestAIInput",0.8f);
         }
         else if(lastTurn == "AI" & !gameEnded)
         {
             Invoke("RequestPlayerInput",0.2f);
-        }
-        else
-        {
-            Debug.LogError("No Input Request sent* Error in lastTurn variable");
         }
     }  
 
