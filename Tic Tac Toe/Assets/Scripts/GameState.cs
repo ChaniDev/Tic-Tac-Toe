@@ -8,6 +8,12 @@ public class GameState : MonoBehaviour
 
     GameManager insGameManager;
 
+    bool wonPlayer = false;
+    bool wonAI = false;
+    bool gameTie = false;
+
+    bool gameActive = false;
+
     void Start()
     {
         insGameManager = FindObjectOfType<GameManager>();
@@ -15,6 +21,24 @@ public class GameState : MonoBehaviour
 
     void CheckBoard()
     {
+        
+    }
 
+    public int GameResult()
+    {
+        if(wonPlayer)
+        {
+            return 2;
+        }
+        else if(wonAI)
+        {
+            return 1;
+        }
+        else if(gameTie)
+        {
+            return 0;
+        }
+
+        return 10;
     }
 }

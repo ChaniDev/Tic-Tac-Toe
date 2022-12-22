@@ -26,7 +26,7 @@ public class InputAI : MonoBehaviour
             if(InputManager.Board[i] == 0 )
             {
                 InputManager.Board[i] = 2;
-                int score = MiniMax(InputManager.Board);
+                int score = MiniMax(InputManager.Board, 0, true);
                 InputManager.Board[i] = 0;
                 
                 if (score > bestScore)
@@ -41,8 +41,19 @@ public class InputAI : MonoBehaviour
         Output(selectedLocation);
     }
 
-    int MiniMax(int[] gameBoard)
+    int MiniMax(int[] gameBoard, int algoDepth, bool isMaximizing)
     {
+        int gameResult = insGameState.GameResult();
+        if (gameResult != 10)
+        {
+            
+        }
+
+        if (isMaximizing)
+        {
+
+        }
+
         return 1;
     }
 
