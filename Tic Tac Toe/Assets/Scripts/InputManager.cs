@@ -68,11 +68,7 @@ public class InputManager : MonoBehaviour
     {
         insGameManager.DisplayHandler(selectedLocation, playerID ,playerIsCross);
 
-        if(turnCount > 8)
-        {
-            gameEnded = true;
-            insGameManager.Invoke("GameReset",2f);
-        }
+        insGameState.CheckBoard();
 
         if(lastTurn == "Player" & !gameEnded)
         {
@@ -82,7 +78,14 @@ public class InputManager : MonoBehaviour
         {
             Invoke("RequestPlayerInput",0.2f);
         }
-    }  
+    } 
+
+    public void GameResult()
+    {
+        gameEnded = true;
+
+        insGameManager.Invoke("GameReset",2f);
+    } 
 
     public void Reset()
     {
