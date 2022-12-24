@@ -63,10 +63,11 @@ public class InputAI : MonoBehaviour
     void Output(int selectedLocation)
     {
         insInputManager.TurnManager(selectedLocation,playerID);
-        print("--Player Input--");
 
         InputManager.validSlotID.Remove(selectedLocation);
-        InputManager.Board[selectedLocation] = 2;
+        InputManager.Board[selectedLocation] = 1;
+
+        insGameState.CheckBoard();
     }
     
 }
