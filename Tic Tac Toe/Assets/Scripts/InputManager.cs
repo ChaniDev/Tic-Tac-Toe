@@ -20,7 +20,6 @@ public class InputManager : MonoBehaviour
     bool playerIsCross = true;
     bool gameEnded = false;
     string lastTurn;
-    public static int turnCount = 0;
     int gameCounter = 0;
 
     void Start()
@@ -52,23 +51,25 @@ public class InputManager : MonoBehaviour
     void RequestPlayerInput()
     {
         lastTurn = "Player";
-        turnCount++;
         
-        insInputPlayer.RequestInput();
+        if(!gameEnded)
+        {
+            insInputPlayer.RequestInput();
+        }
     }
     void RequestAIInput()
     {
         lastTurn = "AI";
-        turnCount++;
 
-        insInputAI.RequestInput();
+        if(!gameEnded)
+        {
+            insInputAI.RequestInput();
+        }
     }
 
     public void TurnManager(int selectedLocation, int playerID)
     {
         insGameManager.DisplayHandler(selectedLocation, playerID ,playerIsCross);
-
-        insGameState.CheckBoard();
 
         if(lastTurn == "Player" & !gameEnded)
         {
@@ -114,7 +115,6 @@ public class InputManager : MonoBehaviour
             validSlotID.Add(i);
         }
 
-        turnCount = 0;
 
         for(int i = 0; i < 9; i++)
         {
