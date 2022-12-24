@@ -52,7 +52,7 @@ public class GameManager : MonoBehaviour
     {
         if(insPlayerIsCross == true)
         {
-            if(insPlayerID == 0)
+            if(insPlayerID == 2)
             {
                 graphicsHolder.Add(
                 Instantiate(Cross, plotLocation[insSelectedLocation], Quaternion.identity));
@@ -91,9 +91,6 @@ public class GameManager : MonoBehaviour
 
     public void PlayerSwitch()
     {
-        print(namePlayer.text);
-        print(nameAI.text);
-
         if(namePlayer.text == "-Player" & nameAI.text == "-AI")
         {
             string playerName = namePlayer.text;
