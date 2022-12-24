@@ -11,7 +11,7 @@ public class GameState : MonoBehaviour
     bool wonAI = false;
     bool gameTie = false;
     int turnCounter = 0;
-    int result;
+    int result = 10;
 
     Vector3Int[] resultGrid = new Vector3Int[]
     {
@@ -83,7 +83,6 @@ public class GameState : MonoBehaviour
             insInputManager.GameResult();
 
             gameReset();
-            turnCounter = 0;
 
             print("--Player WON--");
 
@@ -94,7 +93,6 @@ public class GameState : MonoBehaviour
             insInputManager.GameResult();
 
             gameReset();
-            turnCounter = 0;
 
             print("--AI WON--");
 
@@ -105,7 +103,6 @@ public class GameState : MonoBehaviour
             insInputManager.GameResult();
 
             gameReset();
-            turnCounter = 0;
 
             print("--Game ended in a TIE--");
 
@@ -120,5 +117,7 @@ public class GameState : MonoBehaviour
         wonPlayer = false;
         wonAI = false;
         gameTie = false;
+        result = 10;
+        turnCounter = 0;
     }
 }
