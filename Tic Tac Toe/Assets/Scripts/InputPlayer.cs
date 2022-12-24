@@ -6,13 +6,15 @@ using UnityEngine.EventSystems;
 public class InputPlayer : MonoBehaviour
 {
     InputManager insInputManager;
+    GameState insGameState;
 
     bool enableInput = false;
-    int playerID = 0;
+    int playerID = 2;
 
     void Start()
     {
         insInputManager = FindObjectOfType<InputManager>();
+        insGameState = FindObjectOfType<GameState>();
     }
 
     public void RequestInput()
@@ -37,13 +39,13 @@ public class InputPlayer : MonoBehaviour
         {
             if(insButtonName.Equals(i))
             {
-                print("--Player Input--");
-
                 InputManager.validSlotID.Remove(i);
-                InputManager.Board[i] = 1;
+                InputManager.Board[i] = 2;
 
                 enableInput = false;
                 insInputManager.TurnManager(i,playerID);
+
+                insGameState.CheckBoard();
 
                 break;
             }
