@@ -12,6 +12,20 @@ public class GameState : MonoBehaviour
     bool gameTie = false;
     int turnCounter = 0;
 
+    Vector3Int[] resultGrid = new Vector3Int[]
+    {
+        new Vector3Int (0,1,2),
+        new Vector3Int (3,4,5),
+        new Vector3Int (6,7,8),
+
+        new Vector3Int (0,3,6),
+        new Vector3Int (1,4,7),
+        new Vector3Int (2,5,8),
+
+        new Vector3Int (0,4,8),
+        new Vector3Int (2,4,6),
+    };
+
     void Start()
     {
         insGameManager = FindObjectOfType<GameManager>();
@@ -20,20 +34,43 @@ public class GameState : MonoBehaviour
 
     public void CheckBoard()
     {
-        if((InputManager.Board[0] & InputManager.Board[1] & InputManager.Board[2]) == 1 )
-        {
-            wonAI = true;
-        }
+        foreach(Vector3Int i in resultGrid)
+        {   
+            if(
+                (
+                    InputManager.Board[(i.x)],
+                    InputManager.Board[(i.y)],
+                    InputManager.Board[(i.z)]
+                )
+                == (1,1,1)
+            )
+            {
+                Debug.Log("Win Location:"+ i +" ");
 
-        if((InputManager.Board[6] & InputManager.Board[7] & InputManager.Board[8]) == 2 )
-        {
-            wonPlayer = true;
-        }
+                wonAI = true;
+            }
+            else if(
+                (
+                    InputManager.Board[(i.x)],
+                    InputManager.Board[(i.y)],
+                    InputManager.Board[(i.z)]
+                )
+                == (2,2,2)
+            )
+            {
+                Debug.Log("Win Location:"+ i +" ");
 
-        if(turnCounter > 8 && !wonAI && !wonPlayer)
+                wonPlayer = true;
+            }
+        }
+        
+
+        if(turnCounter >= 8 && !wonAI && !wonPlayer)
         {
             gameTie = true;
         }
+
+        turnCounter++;
 
         GameResult();
     }
@@ -45,6 +82,10 @@ public class GameState : MonoBehaviour
             insInputManager.GameResult();
 
             gameReset();
+            turnCounter = 0;
+
+            print("--Player WON--");
+
             return 2;
         }
         else if(wonAI)
@@ -52,6 +93,10 @@ public class GameState : MonoBehaviour
             insInputManager.GameResult();
 
             gameReset();
+            turnCounter = 0;
+
+            print("--AI WON--");
+
             return 1;
         }
         else if(gameTie)
@@ -59,6 +104,10 @@ public class GameState : MonoBehaviour
             insInputManager.GameResult();
 
             gameReset();
+            turnCounter = 0;
+
+            print("--Game ended in a TIE--");
+
             return 0;
         }
 
