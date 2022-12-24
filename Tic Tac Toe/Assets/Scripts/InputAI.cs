@@ -25,7 +25,7 @@ public class InputAI : MonoBehaviour
         {
             if(InputManager.Board[i] == 0 )
             {
-                InputManager.Board[i] = 2;
+                InputManager.Board[i] = 1;
                 int score = MiniMax(InputManager.Board, 0, false);
                 InputManager.Board[i] = 0;
                 
