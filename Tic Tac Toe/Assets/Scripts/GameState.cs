@@ -10,8 +10,9 @@ public class GameState : MonoBehaviour
     bool wonPlayer = false;
     bool wonAI = false;
     bool gameTie = false;
-    int turnCounter = 0;
     int result = 10;
+
+    int turnCounter = 0;
 
     Vector3Int[] resultGrid = new Vector3Int[]
     {
@@ -71,12 +72,13 @@ public class GameState : MonoBehaviour
             gameTie = true;
         }
 
+
         turnCounter++;
 
         GameResult();
     }
 
-    public int GameResult()
+    int GameResult()
     {
         if(wonPlayer)
         {
