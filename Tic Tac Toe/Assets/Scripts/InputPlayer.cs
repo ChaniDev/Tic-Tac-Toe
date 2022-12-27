@@ -45,7 +45,7 @@ public class InputPlayer : MonoBehaviour
                 enableInput = false;
                 insInputManager.TurnManager(i,playerID);
 
-                insGameState.CheckBoard();
+                insGameState.CheckBoard("GameCore");
 
                 break;
             }
