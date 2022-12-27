@@ -9,8 +9,11 @@ public class GameState : MonoBehaviour
 
     bool wonPlayer = false;
     bool wonAI = false;
+
+    int scanOutcome = 10;
+
+
     bool gameTie = false;
-    int result = 10;
 
     int turnCounter = 0;
 
@@ -34,7 +37,7 @@ public class GameState : MonoBehaviour
         insInputManager = FindObjectOfType<InputManager>();
     }
 
-    public void CheckBoard()
+    public void CheckBoard(string RequestType)
     {
         foreach(Vector3Int i in resultGrid)
         {   
@@ -47,9 +50,15 @@ public class GameState : MonoBehaviour
                 == (1,1,1)
             )
             {
-                Debug.Log("Win Location:"+ i +" ");
-
-                wonAI = true;
+                if(RequestType == "GameCore")
+                {
+                    Debug.Log("Win Location:"+ i +" ");
+                    wonAI = true;
+                }
+                else if(RequestType == "Scan")
+                {
+                    scanOutcome = 1;
+                }
             }
             else if(
                 (
@@ -60,9 +69,33 @@ public class GameState : MonoBehaviour
                 == (2,2,2)
             )
             {
-                Debug.Log("Win Location:"+ i +" ");
+                if(RequestType == "GameCore")
+                {
+                    Debug.Log("Win Location:"+ i +" ");
+                    wonPlayer = true;
+                }
+                else if(RequestType == "Scan")
+                {
+                    scanOutcome = 2;
+                }
+            }
+        }
 
-                wonPlayer = true;
+        if(RequestType == "Scan" && scanOutcome == 10)
+        {
+            bool isTerminal = true;
+            for(int i = 0; i < 9 ; i++)
+            {
+                if(InputManager.Board[i] == 0)
+                {
+                    isTerminal = false;
+                    return;
+                }
+            }
+
+            if(isTerminal)
+            {
+                scanOutcome = 0;
             }
         }
         
@@ -72,10 +105,11 @@ public class GameState : MonoBehaviour
             gameTie = true;
         }
 
-
-        turnCounter++;
-
-        GameResult();
+        if(RequestType == "GameCore")
+        {
+            turnCounter++;
+            GameResult();
+        }
     }
 
     void GameResult()
@@ -87,8 +121,6 @@ public class GameState : MonoBehaviour
             GameReset();
 
             print("--Player WON--");
-
-            result = 2;
         }
         else if(wonAI)
         {
@@ -97,8 +129,6 @@ public class GameState : MonoBehaviour
             GameReset();
 
             print("--AI WON--");
-
-            result = 1;
         }
         else if(gameTie)
         {
@@ -107,8 +137,6 @@ public class GameState : MonoBehaviour
             GameReset();
 
             print("--Game ended in a TIE--");
-
-            result = 0;
         }
     }
 
@@ -117,7 +145,28 @@ public class GameState : MonoBehaviour
         wonPlayer = false;
         wonAI = false;
         gameTie = false;
-        result = 10;
         turnCounter = 0;
+    }
+
+    public int ScanBoard()
+    {
+        CheckBoard("Scan");
+
+        if(scanOutcome == 0)
+        {
+            scanOutcome = 10;
+            return 0;
+        }
+        else if(scanOutcome == 1)
+        {
+            scanOutcome = 10;
+            return 1;
+        }
+        else if(scanOutcome == 2)
+        {
+            scanOutcome = 10;
+            return 2;
+        }
+        else return 10;
     }
 }
