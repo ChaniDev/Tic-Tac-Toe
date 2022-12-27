@@ -78,13 +78,13 @@ public class GameState : MonoBehaviour
         GameResult();
     }
 
-    int GameResult()
+    void GameResult()
     {
         if(wonPlayer)
         {
             insInputManager.GameResult();
 
-            gameReset();
+            GameReset();
 
             print("--Player WON--");
 
@@ -94,7 +94,7 @@ public class GameState : MonoBehaviour
         {
             insInputManager.GameResult();
 
-            gameReset();
+            GameReset();
 
             print("--AI WON--");
 
@@ -104,17 +104,15 @@ public class GameState : MonoBehaviour
         {
             insInputManager.GameResult();
 
-            gameReset();
+            GameReset();
 
             print("--Game ended in a TIE--");
 
             result = 0;
         }
-
-        return result;
     }
 
-    void gameReset()
+    void GameReset()
     {
         wonPlayer = false;
         wonAI = false;
