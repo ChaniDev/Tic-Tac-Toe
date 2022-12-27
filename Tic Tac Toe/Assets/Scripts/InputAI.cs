@@ -46,7 +46,65 @@ public class InputAI : MonoBehaviour
 
     int MiniMax(int[] gameBoard, int algoDepth, bool isMaximizing)
     {
-        return 1;
+        int scanResult = insGameState.ScanBoard(); 
+
+        if(scanResult == 0)
+        {
+            return 0;
+        } 
+        else if(scanResult == 1)
+        {
+            //ai won
+            return 1;
+        }
+        else if(scanResult == 2)
+        {
+            //ai lost
+            return -1;
+        }
+
+        if(isMaximizing)
+        {
+            int bestScore = -10;
+
+            for(int i = 0; i < 9; i++)
+            {
+                if(gameBoard[i] == 0)
+                {
+                    gameBoard[i] = 1;
+                    int score = MiniMax(gameBoard, algoDepth++, false);
+                    gameBoard[i] = 0;
+
+                    if(score > bestScore)
+                    {
+                        bestScore = score;
+                    } 
+                }
+            }
+
+            return bestScore;
+        }
+        else
+        {
+            int bestScore = 10; 
+
+            for(int i = 0; i < 9; i++)
+            {
+                if(gameBoard[i] == 0)
+                {
+                    gameBoard[i] = 2;
+                    int score = MiniMax(gameBoard, algoDepth++, true);
+                    gameBoard[i] = 0;
+
+                    if(score < bestScore)
+                    {
+                        bestScore = score;
+                    }
+                }
+            }
+
+            return bestScore;
+        }
     }
 
     void Output(int selectedLocation)
@@ -56,7 +114,7 @@ public class InputAI : MonoBehaviour
         InputManager.validSlotID.Remove(selectedLocation);
         InputManager.Board[selectedLocation] = 1;
 
-        insGameState.CheckBoard();
+        insGameState.CheckBoard("GameCore");
     }
     
 }
