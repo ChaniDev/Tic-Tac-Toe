@@ -1,6 +1,6 @@
 # Tic Tac Toe
 
--NOTE- This Project is in early beta.
+-NOTE- This Project is in beta.
 
  Game Of Tic Tac Toe.
  
