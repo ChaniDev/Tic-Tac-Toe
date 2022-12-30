@@ -17,6 +17,8 @@ public class GameState : MonoBehaviour
 
     int turnCounter = 0;
 
+    bool isPlayerCross;
+
     Vector3Int[] resultGrid = new Vector3Int[]
     {
         new Vector3Int (0,1,2),
@@ -37,10 +39,17 @@ public class GameState : MonoBehaviour
         insInputManager = FindObjectOfType<InputManager>();
     }
 
+    public void PlayersPostion(bool insPlayerIsCross)
+    {
+        isPlayerCross = insPlayerIsCross;
+    }
+
     public void CheckBoard(string RequestType)
     {
+        int locationTracker = 0;
+
         foreach(Vector3Int i in resultGrid)
-        {   
+        {  
             if(
                 (
                     InputManager.Board[(i.x)],
@@ -52,6 +61,8 @@ public class GameState : MonoBehaviour
             {
                 if(RequestType == "GameCore")
                 {
+                    insGameManager.WinHandler(isPlayerCross,locationTracker, 1);
+
                     Debug.Log("Win Location:"+ i +" ");
                     wonAI = true;
                 }
@@ -71,6 +82,8 @@ public class GameState : MonoBehaviour
             {
                 if(RequestType == "GameCore")
                 {
+                    insGameManager.WinHandler(isPlayerCross,locationTracker, 2);
+
                     Debug.Log("Win Location:"+ i +" ");
                     wonPlayer = true;
                 }
@@ -79,6 +92,8 @@ public class GameState : MonoBehaviour
                     scanOutcome = 2;
                 }
             }
+
+            locationTracker++; 
         }
 
         if(RequestType == "Scan" && scanOutcome == 10)
