@@ -9,6 +9,14 @@ public class InputAI : MonoBehaviour
 
     int playerID = 1;
 
+    bool ActiveAI = true;
+
+
+    public void SettingsAI(bool AI)
+    {
+        ActiveAI = AI;
+    }
+
     void Start()
     {
         insInputManager = FindObjectOfType<InputManager>();
@@ -28,6 +36,7 @@ public class InputAI : MonoBehaviour
                 InputManager.Board[i] = 1;
 
                 int score = MiniMax(InputManager.Board, 0, false);
+
                 InputManager.Board[i] = 0;
                 
                 if (score > bestScore)
@@ -46,6 +55,11 @@ public class InputAI : MonoBehaviour
 
     int MiniMax(int[] gameBoard, int algoDepth, bool isMaximizing)
     {
+        if(!ActiveAI)
+        {
+            return 1;
+        }
+
         int scanResult = insGameState.ScanBoard(); 
 
         if(scanResult == 0)
