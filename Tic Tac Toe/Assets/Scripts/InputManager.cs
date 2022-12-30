@@ -38,6 +38,8 @@ public class InputManager : MonoBehaviour
 
     public void TriggerStartTurn()
     {
+        insGameState.PlayersPostion(playerIsCross);
+
         if(playerIsCross)
         {
             Invoke("RequestPlayerInput",0.2f);
