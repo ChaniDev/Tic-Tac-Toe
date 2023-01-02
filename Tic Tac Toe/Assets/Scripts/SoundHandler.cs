@@ -5,25 +5,81 @@ using UnityEngine.Audio;
 
 public class SoundHandler : MonoBehaviour
 {
-    public SoundPanel[] Audio;
+    SoundHandler insSoundHandler;
+
+    AudioSource BGSHandler;
 
 
-    void PlaySound(string soundName)
+    public SFXFiles[] SFXManager;
+    public BGSFiles[] BGSManager;
+
+    void Start()
     {
-        foreach(SoundPanel i in Audio)
+        insSoundHandler = FindObjectOfType<SoundHandler>();
+
+        BGSHandler = insSoundHandler.gameObject.AddComponent<AudioSource>();
+    }
+
+    void PlaySFX(string soundEffectName)
+    {
+        for(int i = 0; i < SFXManager.Length; i++)
         {
-            if(i.SoundName == soundName)
+            if(SFXManager[i].SFXName == soundEffectName)
             {
-                i.SoundFile.Play();
+                AudioSource SFXHandler;
+                SFXHandler = insSoundHandler.gameObject.AddComponent<AudioSource>();
+
+                    //-- Properties --
+                SFXHandler.clip = SFXManager[i].SoundEffect;
+                SFXHandler.volume = SFXManager[i].Volume;
+                    //----------------
+                
+                SFXHandler.Play();
+
+                Destroy(SFXHandler, SFXHandler.clip.length);
+            }
+            else
+            {
+                Debug.LogWarning($"No match found In SFX - Error-{soundEffectName}-");
             }
         }
     }
+
+    void PlayBGS(string backgroundSoundsName)
+    {
+        for(int i = 0; i < BGSManager.Length; i++)
+        {
+            if(BGSManager[i].BGSName == backgroundSoundsName)
+            {
+                    //-- Properties --
+                BGSHandler.clip = BGSManager[i].Music;
+                BGSHandler.volume = BGSManager[i].Volume;
+                BGSHandler.loop = true;
+                    //----------------
+                
+                BGSHandler.Play();
+            }
+            else
+            {
+                Debug.LogWarning($"No match found In BGS - Error-{backgroundSoundsName}-");
+            }
+        }
+    }
+
 }
 
+    [System.Serializable]
+public class SFXFiles 
+{
+    public string SFXName;
+    public AudioClip SoundEffect;
+    [Range(0,1)] public float Volume;
+}
 
     [System.Serializable]
-public class SoundPanel 
+public class BGSFiles
 {
-    public string SoundName;
-    public AudioSource SoundFile;
+    public string BGSName;
+    public AudioClip Music;
+    [Range(0,1)] public float Volume;
 }
