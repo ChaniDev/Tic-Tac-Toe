@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
 
     InputManager insInputManager;
     InputAI insInputAI;
+    SoundHandler insSoundHandler;
 
     [SerializeField] private bool AI = true;
 
@@ -47,6 +48,10 @@ public class GameManager : MonoBehaviour
     TextMeshProUGUI namePlayer;
     TextMeshProUGUI scorePlayer;
 
+    [SerializeField] GameObject winScreen;
+    [SerializeField] GameObject loseScreen;
+    [SerializeField] GameObject drawScreen;
+
     void Update()
     {
        insInputAI.SettingsAI(AI);
@@ -56,6 +61,7 @@ public class GameManager : MonoBehaviour
     {
         insInputManager = FindObjectOfType<InputManager>();
         insInputAI = FindObjectOfType<InputAI>();
+        insSoundHandler = FindObjectOfType<SoundHandler>();
 
         nameAI = GameObject.Find("AI").GetComponent<TMPro.TextMeshProUGUI>();
         scoreAI = GameObject.Find("CircleScores").GetComponent<TMPro.TextMeshProUGUI>();
@@ -86,6 +92,8 @@ public class GameManager : MonoBehaviour
                 graphicsHolder.Add(
                 Instantiate(Circle, plotLocation[insSelectedLocation], Quaternion.identity));
             }
+
+            insSoundHandler.PlaySFX("Click");
         }
         else
         {
@@ -99,6 +107,8 @@ public class GameManager : MonoBehaviour
                 graphicsHolder.Add(
                 Instantiate(Circle, plotLocation[insSelectedLocation], Quaternion.identity));
             }
+
+            insSoundHandler.PlaySFX("Click");
         }      
     }
 
@@ -168,6 +178,8 @@ public class GameManager : MonoBehaviour
         }
         graphicsHolder.Clear();
 
+        DrawResult("Reset");
+
         insInputManager.Reset();
     }
 
@@ -196,6 +208,31 @@ public class GameManager : MonoBehaviour
             scorePlayer.text = aiScores;
             nameAI.text = playerName;
             scoreAI.text = playerScores;
+        }
+    }
+
+    public void DrawResult(string Result)
+    {
+        if(Result == "Win")
+        {
+            winScreen.SetActive(true);
+            insSoundHandler.PlaySFX("Win");
+        }
+        else if(Result == "Lose")
+        {
+            loseScreen.SetActive(true);
+            insSoundHandler.PlaySFX("Lose");
+        }
+        else if(Result == "Draw")
+        {
+            drawScreen.SetActive(true);
+            insSoundHandler.PlaySFX("Draw");
+        }
+        else if(Result == "Reset")
+        {
+            winScreen.SetActive(false);
+            loseScreen.SetActive(false);
+            drawScreen.SetActive(false);
         }
     }
 }
