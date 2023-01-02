@@ -20,12 +20,16 @@ public class SoundHandler : MonoBehaviour
         BGSHandler = insSoundHandler.gameObject.AddComponent<AudioSource>();
     }
 
-    void PlaySFX(string soundEffectName)
+    public void PlaySFX(string soundEffectName)
     {
+        bool MatchFound = false;
+
         for(int i = 0; i < SFXManager.Length; i++)
         {
             if(SFXManager[i].SFXName == soundEffectName)
             {
+                MatchFound = true;
+
                 AudioSource SFXHandler;
                 SFXHandler = insSoundHandler.gameObject.AddComponent<AudioSource>();
 
@@ -38,19 +42,23 @@ public class SoundHandler : MonoBehaviour
 
                 Destroy(SFXHandler, SFXHandler.clip.length);
             }
-            else
-            {
-                Debug.LogWarning($"No match found In SFX - Error-{soundEffectName}-");
-            }
+        }
+        if(!MatchFound)
+        {
+            Debug.LogWarning($"No match found In BGS - Error-{soundEffectName}-");
         }
     }
 
-    void PlayBGS(string backgroundSoundsName)
+    public void PlayBGS(string backgroundSoundsName)
     {
+        bool MatchFound = false;
+
         for(int i = 0; i < BGSManager.Length; i++)
         {
             if(BGSManager[i].BGSName == backgroundSoundsName)
             {
+                MatchFound = true;
+
                     //-- Properties --
                 BGSHandler.clip = BGSManager[i].Music;
                 BGSHandler.volume = BGSManager[i].Volume;
@@ -59,10 +67,10 @@ public class SoundHandler : MonoBehaviour
                 
                 BGSHandler.Play();
             }
-            else
-            {
-                Debug.LogWarning($"No match found In BGS - Error-{backgroundSoundsName}-");
-            }
+        }
+        if(!MatchFound)
+        {
+            Debug.LogWarning($"No match found In BGS - Error-{backgroundSoundsName}-");
         }
     }
 
