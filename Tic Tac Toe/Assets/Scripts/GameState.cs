@@ -136,6 +136,7 @@ public class GameState : MonoBehaviour
             GameReset();
 
             print("--Player WON--");
+            insGameManager.DrawResult("Win");
         }
         else if(wonAI)
         {
@@ -144,6 +145,7 @@ public class GameState : MonoBehaviour
             GameReset();
 
             print("--AI WON--");
+            insGameManager.DrawResult("Lose");
         }
         else if(gameTie)
         {
@@ -152,6 +154,7 @@ public class GameState : MonoBehaviour
             GameReset();
 
             print("--Game ended in a TIE--");
+            insGameManager.DrawResult("Draw");
         }
     }
 
